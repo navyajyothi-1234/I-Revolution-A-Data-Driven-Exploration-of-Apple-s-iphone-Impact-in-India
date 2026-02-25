@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iRevolution | Interactive Dashboards</title>
+    <meta name="description" content="Interactive Tableau dashboards for Apple's market analysis in India.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Dashboard-specific body override */
+        body {
+            background: #0a0a1a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor-follower"></div>
+    <div class="mesh-bg"></div>
+
+    <header>
+        <a href="{{ url_for('home') }}" class="logo">iRevolution</a>
+        <nav>
+            <a href="{{ url_for('home') }}#home">Home</a>
+            <a href="{{ url_for('home') }}#services">Services</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('home') }}#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="section-title" style="margin-top:2rem;">Market Insight Dashboards</h1>
+        <p style="text-align:center; color:var(--text-muted); margin-bottom:3rem; font-size:1.05rem;">Explore Apple's
+            full market story through data</p>
+
+        <div class="dashboard-group">
+            <h2>Market Insights</h2>
+            <div class="card">
+                <iframe
+                    src="https://public.tableau.com/views/MarketInsights_17706249180030/MarketInsightsStory?:showVizHome=no"></iframe>
+            </div>
+        </div>
+
+        <div class="dashboard-group">
+            <h2>Market Power Analysis</h2>
+            <div class="card">
+                <iframe src="https://public.tableau.com/views/MarketPower/MarketPowerStory?:showVizHome=no"></iframe>
+            </div>
+        </div>
+
+        <div class="dashboard-group">
+            <h2>Sales &amp; Revenue Trends</h2>
+            <div class="card">
+                <iframe
+                    src="https://public.tableau.com/views/SalesRevenueTrendsDashBoard/SALESREVENUETRENDSDASHBOARD?:showVizHome=no"></iframe>
+            </div>
+        </div>
+
+        <div class="dashboard-group">
+            <h2>Market Share</h2>
+            <div class="card">
+                <iframe
+                    src="https://public.tableau.com/views/MarketShareDashBoard/MARKETSHAREDASHBOARD?:showVizHome=no"></iframe>
+            </div>
+        </div>
+
+        <div class="dashboard-group">
+            <h2>Product Deep Dive</h2>
+            <div class="card">
+                <iframe
+                    src="https://public.tableau.com/views/ProductInsightsDashBoard/PRODUCTINSIGHTSDASHBOARD?:showVizHome=no"></iframe>
+            </div>
+        </div>
+
+        <div class="dashboard-group">
+            <h2>Executive Summary</h2>
+            <div class="card">
+                <iframe
+                    src="https://public.tableau.com/views/ExclusiveSummaryDashBoard/EXCLUSIVESUMMARYDASHBOARD?:showVizHome=no"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 iRevolution Analytics · Data-Driven Decisions
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('a, .card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+    </script>
+</body>
+
+</html>
