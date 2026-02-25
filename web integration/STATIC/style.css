@@ -1,0 +1,542 @@
+/* ===========================
+   iRevolution – Professional CSS
+   =========================== */
+
+:root {
+    --primary: #6c63ff;
+    --primary-light: #a89bff;
+    --accent: #00c6ff;
+    --accent2: #ff6ec7;
+    --dark: #0a0a1a;
+    --dark-card: #111130;
+    --glass: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #e8e8f0;
+    --text-muted: #8888aa;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset ─────────────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    animation: fadeInPage 0.9s ease-out forwards;
+}
+
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Animated Gradient Background ──────────── */
+.mesh-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--dark);
+    overflow: hidden;
+}
+
+.mesh-bg::before {
+    content: '';
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(108, 99, 255, 0.25) 0%, transparent 65%);
+    top: -200px;
+    left: -200px;
+    animation: floatA 12s ease-in-out infinite alternate;
+}
+
+.mesh-bg::after {
+    content: '';
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(0, 198, 255, 0.18) 0%, transparent 65%);
+    bottom: -150px;
+    right: -150px;
+    animation: floatB 15s ease-in-out infinite alternate;
+}
+
+@keyframes floatA {
+    to {
+        transform: translate(80px, 80px) scale(1.1);
+    }
+}
+
+@keyframes floatB {
+    to {
+        transform: translate(-80px, -60px) scale(1.15);
+    }
+}
+
+/* ── Custom Cursor ──────────────────────────── */
+.cursor-follower {
+    position: fixed;
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle, var(--primary-light), var(--accent));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    transition: transform 0.18s ease-out, opacity 0.3s;
+    box-shadow: 0 0 12px var(--primary);
+}
+
+.cursor-follower.hovering {
+    transform: scale(3.5);
+    opacity: 0.35;
+}
+
+@media (max-width: 768px) {
+    .cursor-follower {
+        display: none;
+    }
+}
+
+/* ── Header / Nav ───────────────────────────── */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.1rem 4rem;
+    background: rgba(10, 10, 26, 0.7);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.55rem;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--primary-light), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    margin-left: 2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ── Sections ───────────────────────────────── */
+section {
+    padding: 10rem 10%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero {
+    padding-top: 14rem;
+}
+
+/* ── Scroll Reveal ──────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: var(--transition);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Hero Headline ──────────────────────────── */
+.hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(3.2rem, 9vw, 6rem);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 28px rgba(108, 99, 255, 0.35));
+}
+
+.hero p {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--text-muted);
+    max-width: 740px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+}
+
+/* ── CTA Button ─────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.6rem;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: var(--transition);
+    box-shadow: 0 8px 30px rgba(108, 99, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50px;
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 198, 255, 0.4);
+}
+
+/* ── Section Heading ────────────────────────── */
+.section-heading {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #fff, var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-sub {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* ── Services Grid ──────────────────────────── */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+    width: 100%;
+    margin-top: 3.5rem;
+}
+
+.service-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 2.8rem 2.4rem;
+    border-radius: 28px;
+    backdrop-filter: blur(12px);
+    transition: var(--transition);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.07), rgba(0, 198, 255, 0.04));
+    opacity: 0;
+    transition: opacity 0.4s;
+    border-radius: 28px;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card:hover {
+    border-color: rgba(108, 99, 255, 0.4);
+    box-shadow: 0 0 40px rgba(108, 99, 255, 0.15), 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+}
+
+.card-icon.blue {
+    background: rgba(108, 99, 255, 0.2);
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+}
+
+.card-icon.cyan {
+    background: rgba(0, 198, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 198, 255, 0.3);
+}
+
+.card-icon.pink {
+    background: rgba(255, 110, 199, 0.2);
+    box-shadow: 0 0 20px rgba(255, 110, 199, 0.3);
+}
+
+.service-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.9rem;
+    color: #fff;
+}
+
+.service-card p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* ── Stats Bar ──────────────────────────────── */
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    padding: 2.5rem 3rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
+    width: 100%;
+    max-width: 800px;
+}
+
+.stat h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--primary-light), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+
+.stat p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+}
+
+/* ── Contact Box ────────────────────────────── */
+.contact-box {
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.12), rgba(0, 198, 255, 0.06));
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    padding: 4.5rem;
+    border-radius: 40px;
+    width: 100%;
+    max-width: 900px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0 60px rgba(108, 99, 255, 0.1), 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.contact-box h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-box .email-tag {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    background: var(--glass);
+}
+
+.contact-box .project-tag {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+/* ── Footer ─────────────────────────────────── */
+footer {
+    padding: 3rem 4rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+/* ── Dashboard Specifics ────────────────────── */
+main {
+    padding-top: 8rem;
+    padding-bottom: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.section-title {
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #fff, var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dashboard-group {
+    margin-bottom: 5rem;
+}
+
+.dashboard-group h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.7rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    padding-left: 1.2rem;
+    border-left: 4px solid var(--primary);
+    background: linear-gradient(90deg, var(--primary-light), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card {
+    background: var(--dark-card);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--glass-border);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 50px rgba(108, 99, 255, 0.2), 0 25px 60px rgba(0, 0, 0, 0.5);
+    border-color: rgba(108, 99, 255, 0.35);
+}
+
+iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+    display: block;
+}
+
+/* ── Tilt Card ──────────────────────────────── */
+.tilt-card {
+    transition: transform 0.12s ease-out;
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 768px) {
+    header {
+        padding: 1.2rem 1.5rem;
+    }
+
+    section {
+        padding: 6rem 5%;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .service-card {
+        padding: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .contact-box {
+        padding: 2.5rem;
+    }
+
+    iframe {
+        height: 500px;
+    }
+
+    .stats-bar {
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+}
